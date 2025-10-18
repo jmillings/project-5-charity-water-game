@@ -1,0 +1,114 @@
+/* Base Reset */
+* { box-sizing: border-box; }
+body { margin:0; font-family: 'Segoe UI', Arial, sans-serif; background: linear-gradient(#1e3c72,#2a5298); color:#fff; -webkit-font-smoothing: antialiased; }
+button { cursor:pointer; font: inherit; }
+
+:root {
+	--accent:#1dbbe6;
+	--accent-alt:#ffcc00;
+	--danger:#e84545;
+	--success:#4caf50;
+	--panel:rgba(0,0,0,0.35);
+	--panel-solid:#0d1f33;
+}
+
+.hidden { display:none !important; }
+.screen { position:relative; width:100%; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:2rem; }
+/* Splash */
+#splash .logo { font-size:2.2rem; font-weight:600; letter-spacing:1px; }
+#splash .logo span { color: var(--accent-alt); }
+.game-title { font-size: clamp(2rem,6vw,4rem); margin:.5rem 0 1rem; text-shadow:0 4px 12px rgba(0,0,0,.4); }
+.menu { display:flex; flex-direction:column; gap:.75rem; width: min(320px,80vw); }
+.menu button { padding:.85rem 1.1rem; border:none; border-radius:10px; background: var(--panel); backdrop-filter: blur(4px); color:#fff; font-weight:600; letter-spacing:.5px; position:relative; overflow:hidden; }
+.menu button.primary { background: linear-gradient(135deg,var(--accent) 0%, #56c9df 100%); }
+.menu button.donate { background: linear-gradient(135deg,#ff9500,#ffcc33); color:#222; }
+.menu button:hover { filter:brightness(1.15); }
+.menu button:active { transform:scale(.97); }
+
+.loading { margin:1rem 0; height:60px; display:flex; align-items:center; justify-content:center; }
+.droplet-spinner { width:38px; height:38px; position:relative; }
+.droplet-spinner:before, .droplet-spinner:after { content:""; position:absolute; inset:0; border-radius:55% 55% 65% 65%; background: radial-gradient(circle at 30% 25%, #9ee7ff, #1dbbe6 70%); animation: spin 2.6s linear infinite; }
+.droplet-spinner:after { filter:blur(6px) brightness(1.2); opacity:.6; }
+@keyframes spin { 0%{ transform:rotate(0deg);} 100%{ transform:rotate(360deg);} }
+
+/* HUD */
+.hud { position:sticky; top:0; width:100%; display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; align-items:center; background:rgba(0,0,0,.35); padding:.6rem 1rem; backdrop-filter: blur(8px); }
+.meter { display:flex; align-items:center; gap:.6rem; }
+.meter-label { font-size:.75rem; opacity:.8; }
+.meter-bar { width:160px; height:14px; background:#16324d; border-radius:8px; overflow:hidden; box-shadow: inset 0 0 4px rgba(0,0,0,.6); }
+#cleanBar { height:100%; width:0%; background: linear-gradient(90deg,#3ad1ff,#1dbbe6,#1dbbe6); transition: width .4s ease; }
+#cleanPercent { font-size:.85rem; font-weight:600; }
+.stats { display:flex; gap:1rem; font-size:.85rem; flex-wrap:wrap; }
+.actions { display:flex; gap:.5rem; }
+.actions button { padding:.55rem .9rem; border:none; border-radius:6px; background:#184b72; color:#fff; font-size:.75rem; }
+.actions button.secondary { background:#235e91; }
+.actions button:hover { filter:brightness(1.2); }
+
+/* Game Area */
+#gameArea { position:relative; width:100%; max-width:1000px; margin:0 auto; aspect-ratio: 16/10; background: linear-gradient(#14517a,#0d3350); border:3px solid rgba(255,255,255,.18); border-radius:18px; overflow:hidden; box-shadow:0 4px 30px rgba(0,0,0,.4); }
+#gameCanvas { width:100%; height:100%; display:block; background: repeating-linear-gradient(45deg,#0d3b56 0 12px,#0c3048 12px 24px); }
+
+/* Joystick */
+.joystick { position:absolute; bottom:1.2rem; left:1.2rem; width:115px; height:115px; background:rgba(255,255,255,.07); border:2px solid rgba(255,255,255,.2); border-radius:50%; backdrop-filter: blur(4px); touch-action:none; }
+.joystick .stick { position:absolute; top:50%; left:50%; width:55px; height:55px; transform:translate(-50%,-50%); background:radial-gradient(circle at 30% 30%,#3ad1ff,#1dbbe6); border-radius:50%; box-shadow:0 4px 12px rgba(0,0,0,.4); }
+
+/* Overlay / Popups */
+.overlay, .popup { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.6); backdrop-filter: blur(6px); z-index:50; }
+.overlay #overlayContent, .popup .content { background:linear-gradient(145deg,#0d3350,#184b72); padding:1.5rem 1.75rem; border-radius:18px; width:min(560px,90vw); max-height:80vh; overflow-y:auto; box-shadow:0 8px 24px rgba(0,0,0,.5); }
+.popup h2 { margin-top:0; }
+
+/* Buttons global */
+button.primary.small { padding:.5rem .9rem; font-size:.75rem; }
+.donate { font-weight:700; }
+
+/* Milestone popup */
+#milestonePopup .content { text-align:center; }
+#milestoneTitle { font-size:1.5rem; }
+#milestoneFact { font-size:.95rem; margin:.75rem 0 1rem; }
+.popup-actions { display:flex; flex-wrap:wrap; gap:.75rem; justify-content:center; }
+
+/* End Screen */
+#endScreen .content { text-align:center; }
+#badgeArea { display:flex; gap:.6rem; flex-wrap:wrap; justify-content:center; margin:.75rem 0; }
+.badge { background:#235e91; padding:.4rem .7rem; border-radius:20px; font-size:.65rem; letter-spacing:.5px; }
+
+/* Confetti */
+.confetti { position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:200; }
+.confetti-piece { position:absolute; width:10px; height:14px; background: var(--accent-alt); top:0; animation: fall 3.5s linear forwards; }
+@keyframes fall { to { transform: translateY(110vh) rotate(720deg); opacity:.2; } }
+
+/* Animations for cleaning */
+.sparkle { position:absolute; width:22px; height:22px; background:radial-gradient(circle,#fff,#8fe9ff 60%,transparent 70%); pointer-events:none; animation: sparkle .6s ease-out forwards; mix-blend-mode:screen; }
+@keyframes sparkle { 0%{ transform:scale(.2); opacity:.9;} 100%{ transform:scale(1.6); opacity:0;} }
+
+/* Responsive */
+@media (max-width:900px) {
+	.stats { gap:.6rem; }
+	#gameArea { aspect-ratio: 3/4; }
+	.hud { font-size:12px; }
+	.joystick { display:block; }
+}
+@media (hover:none) and (pointer:coarse) { 
+	.joystick { display:block; }
+	#cleanBtn { font-size:1rem; }
+}
+
+/* Sprites (Canvas will draw but fallback CSS classes if needed) */
+.sprite { position:absolute; }
+.pollutant.plastic { width:26px; height:60px; position:absolute; background: linear-gradient(#e9f9ff,#b3e1f3); border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,.4); }
+.pollutant.plastic:before { content:""; position:absolute; top:14px; left:3px; right:3px; height:14px; background:rgba(173,226,241,0.85); border-radius:4px; }
+.pollutant.plastic:after { content:""; position:absolute; top:-6px; left:4px; right:4px; height:10px; background:#3fa1c8; border-radius:3px; }
+.pollutant.oil { width:80px; height:50px; background: radial-gradient(circle at 50% 50%, #222 0%, #000 60%, #050505 100%); border-radius:50%; position:absolute; box-shadow:0 0 25px 8px rgba(0,0,0,.8); }
+.pollutant.oil:after { content:""; position:absolute; inset:10% 15%; background: linear-gradient(90deg, rgba(255,0,200,0.25), rgba(0,255,255,0.35), rgba(255,255,0,0.25)); border-radius:50%; filter:blur(1px); }
+.pollutant.trash { width:50px; height:40px; position:absolute; background: linear-gradient(#6b7d31,#3e4a1d); border-radius:40% 40% 45% 45%; box-shadow:0 4px 10px rgba(0,0,0,.5); }
+.pollutant.trash:before { content:""; position:absolute; width:24px; height:12px; top:8px; left:10px; background:#c2a112; border-radius:50% 50% 40% 40%; transform:rotate(-20deg); }
+.pollutant.trash:after { content:""; position:absolute; width:14px; height:14px; top:14px; left:28px; background:#d9d9d9; border-radius:50%; box-shadow: inset 0 0 3px #777; }
+.pollutant.barrel { background: linear-gradient(#5c3b16,#9d6a23,#5c3b16); width:46px; height:60px; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,.5); position:absolute; }
+.pollutant.barrel:before { content:"☣"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:20px; color:#f5d10b; text-shadow:0 1px 2px #000; }
+.droplet { background: radial-gradient(circle at 30% 25%, #9ee7ff, #1dbbe6 70%); width:26px; height:34px; border-radius:55% 55% 65% 65%; box-shadow:0 3px 10px rgba(0,0,0,.4); position:absolute; }
+.boat { width:70px; height:40px; position:absolute; background: linear-gradient(#c07a2a,#8b5a21,#5a3a18); border-radius: 50% / 60%; box-shadow:0 4px 16px rgba(0,0,0,.5); }
+.boat:before { content:""; position:absolute; left:15%; right:15%; top:45%; height:14%; background:#b9813c; border-radius:4px; }
+
+/* Utility */
+.fade-in { animation: fade .5s ease-out; }
+@keyframes fade { from{ opacity:0; transform:translateY(10px);} to{ opacity:1; transform:translateY(0);} }

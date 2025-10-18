@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Clean Stream - charity: water</title>
+	<link rel="stylesheet" href="style.css" />
+	<link rel="preload" href="style.css" as="style" />
+</head>
+<body>
+	<div id="splash" class="screen active">
+		<div class="logo">charity:<span> water</span></div>
+		<h1 class="game-title">Clean Stream</h1>
+		<div class="loading">
+			<div class="droplet-spinner"></div>
+		</div>
+		<div class="menu">
+			<button id="playBtn" class="primary">Play</button>
+			<button id="difficultyBtn">Difficulty: <span id="difficultyLabel">Easy</span></button>
+			<button id="tutorialBtn">Tutorial</button>
+			<button id="mobileInstrBtn">Mobile Controls</button>
+			<button id="aboutBtn">About</button>
+			<button id="donateBtn" class="donate">Donate</button>
+		</div>
+	</div>
+
+	<div id="gameUI" class="screen hidden">
+		<header class="hud">
+			<div class="meter">
+				<div class="meter-label">Cleanliness</div>
+				<div class="meter-bar"><div id="cleanBar"></div></div>
+				<div id="cleanPercent">0%</div>
+			</div>
+			<div class="stats">
+				<div>Score: <span id="score">0</span></div>
+				<div>Drops: <span id="drops">0</span></div>
+				<div>Time: <span id="timer">0</span></div>
+				<div>Level: <span id="level">1</span></div>
+				<div>High Score: <span id="highScore">0</span></div>
+			</div>
+			<div class="actions">
+				<button id="cleanBtn" class="secondary">Clean</button>
+				<button id="resetBtn" class="secondary">Reset</button>
+				<button id="quitBtn" class="secondary">Quit</button>
+						<button id="soundToggle" class="secondary" aria-pressed="false" title="Toggle Sound">Sound: On</button>
+			</div>
+		</header>
+		<div id="gameArea">
+			<canvas id="gameCanvas" width="800" height="500"></canvas>
+			<div id="joystick" class="joystick hidden">
+				<div class="stick"></div>
+			</div>
+		</div>
+	</div>
+
+	<div id="overlay" class="overlay hidden">
+		<div id="overlayContent"></div>
+		<button id="overlayClose" class="primary small">Close</button>
+	</div>
+
+	<div id="milestonePopup" class="popup hidden">
+		<div class="content">
+			<h2 id="milestoneTitle"></h2>
+			<p id="milestoneFact"></p>
+			<div class="popup-actions">
+				<button id="shareBtn" class="secondary">Share</button>
+				<button id="popupDonateBtn" class="donate">Donate</button>
+				<button id="milestoneClose" class="primary">Continue</button>
+			</div>
+		</div>
+	</div>
+
+	<div id="endScreen" class="popup hidden">
+		<div class="content">
+			<h2 id="endTitle"></h2>
+			<p id="endSummary"></p>
+			<div id="badgeArea"></div>
+			<div class="popup-actions">
+				<button id="playAgainBtn" class="primary">Play Again</button>
+				<button id="nextLevelBtn" class="secondary hidden">Next Level</button>
+				<button id="endDonateBtn" class="donate">Donate</button>
+			</div>
+		</div>
+	</div>
+
+	<div id="confetti" class="confetti hidden"></div>
+
+	<script src="game.js" defer></script>
+</body>
+</html>
